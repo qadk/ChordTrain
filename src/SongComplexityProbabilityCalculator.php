@@ -30,9 +30,9 @@ class SongComplexityProbabilityCalculator
 
     private function setLabelProbabilities()
     {
-        foreach (array_keys($this->label_counts) as $label) {
+        foreach ($this->label_counts as $label => $count) {
             $numberOfSongs = $this->getNumberOfSongs();
-            $this->label_probabilities[$label] = $this->label_counts[$label] / $numberOfSongs;
+            $this->label_probabilities[$label] = $count / $numberOfSongs;
         }
     }
 
