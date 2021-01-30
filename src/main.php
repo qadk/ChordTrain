@@ -11,12 +11,6 @@ $creep = ['g', 'gsus4', 'b', 'bsus4', 'c', 'cmsus4', 'cm6'];
 $paperBag = ['bm7', 'e', 'c', 'g', 'b7', 'f', 'em', 'a', 'cmaj7', 'em7', 'a7', 'f7', 'b'];
 $toxic = ['cm', 'eb', 'g', 'cdim', 'eb7', 'd7', 'db7', 'ab', 'gmaj7', 'g7'];
 $bulletproof = ['d#m', 'g#', 'b', 'f#', 'g#m', 'c#'];
-$songs = [];
-$allChords = [];
-$labelCounts = [];
-$labelProbabilities = [];
-$chordCountsInLabels = [];
-$probabilityOfChordsInLabels = [];
 
 $calculator = new SongComplexityProbabilityCalculator();
 

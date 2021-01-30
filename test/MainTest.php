@@ -6,8 +6,6 @@ final class MainTest extends TestCase
 {
     public function testOutPut(): void
     {
-        global $imagine, $somewhere_over_the_rainbow, $tooManyCooks, $iWillFollowYouIntoTheDark, $babyOneMoreTime, $creep, $army, $paperBag, $toxic, $bulletproof, $songs, $allChords, $labelCounts, $labelProbabilities, $chordCountsInLabels, $probabilityOfChordsInLabels;
-
         $this->expectOutputString('Array
 (
     [easy] => 0.33333333333333
