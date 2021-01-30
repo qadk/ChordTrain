@@ -30,16 +30,10 @@ class SongComplexityProbabilityCalculator
 
     public function setChordCountsInLabels()
     {
-        foreach ($this->songs as $i) {
-            if (!isset($this->chord_counts_in_labels[$i[0]])) {
-                $this->chord_counts_in_labels[$i[0]] = [];
-            }
-            foreach ($i[1] as $j) {
-                if ($this->chord_counts_in_labels[$i[0]][$j] > 0) {
-                    $this->chord_counts_in_labels[$i[0]][$j] = $this->chord_counts_in_labels[$i[0]][$j] + 1;
-                } else {
-                    $this->chord_counts_in_labels[$i[0]][$j] = 1;
-                }
+        foreach ($this->songs as $song) {
+            $label = $song[0];
+            foreach ($song[1] as $chord) {
+                $this->chord_counts_in_labels[$label][$chord] += 1;
             }
         }
     }
