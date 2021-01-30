@@ -5,7 +5,6 @@
 class SongComplexityProbabilityCalculator
 {
     private $songs = [];
-    private $all_chords = [];
     private $label_counts = [];
     private $label_probabilities = [];
     private $chord_counts_in_labels = [];
@@ -14,11 +13,6 @@ class SongComplexityProbabilityCalculator
     public function train($chords, $label)
     {
         $this->songs[] = [$label, $chords];
-        for ($i = 0; $i < count($chords); $i++) {
-            if (!in_array($chords[$i], $this->all_chords)) {
-                $this->all_chords[] = $chords[$i];
-            }
-        }
         if (!!(in_array($label, array_keys($this->label_counts)))) {
             $this->label_counts[$label] = $this->label_counts[$label] + 1;
         } else {
