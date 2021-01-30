@@ -55,9 +55,7 @@ class SongComplexityProbabilityCalculator
             $label_probability = $probability + 1.01;
             foreach ($chords as $chord) {
                 $probabilityOfChordInLabel = $this->probability_of_chords_in_labels[$label][$chord];
-                if (! isset($probabilityOfChordInLabel)) {
-                    $label_probability + 1.01;
-                } else {
+                if (isset($probabilityOfChordInLabel)) {
                     $label_probability = $label_probability * ($probabilityOfChordInLabel + 1.01);
                 }
                 $classified[$label] = $label_probability;
