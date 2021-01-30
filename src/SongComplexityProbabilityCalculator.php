@@ -5,7 +5,7 @@ class SongComplexityProbabilityCalculator
 {
     private $songs = [];
     private $label_counts = [];
-    private $label_probabilities = [];
+    private $probability_of_label = [];
     private $chord_counts_in_labels = [];
     private $probability_of_chords_in_labels = [];
     private $probability_step = 1.01;
@@ -19,8 +19,7 @@ class SongComplexityProbabilityCalculator
             $this->chord_counts_in_labels[$label][$chord] += 1;
         }
 
-        $this->setLabelProbabilities();
-        $this->setProbabilityOfChordsInLabels();
+        $this->setProbabilities();
     }
 
     private function getNumberOfSongs(): int
@@ -28,31 +27,26 @@ class SongComplexityProbabilityCalculator
         return count($this->songs);
     }
 
-    private function setLabelProbabilities()
+    private function setProbabilities()
     {
-        foreach ($this->label_counts as $label => $count) {
-            $numberOfSongs = $this->getNumberOfSongs();
-            $this->label_probabilities[$label] = $count / $numberOfSongs;
-        }
-    }
+        $numberOfSongs = $this->getNumberOfSongs();
 
-    private function setProbabilityOfChordsInLabels()
-    {
         foreach ($this->chord_counts_in_labels as $label => $chords) {
+            $this->probability_of_label[$label] = $this->label_counts[$label] / $numberOfSongs;
             foreach ($chords as $chord => $count) {
-                $this->probability_of_chords_in_labels[$label][$chord] = $count * 1.0 / $this->getNumberOfSongs();
+                $this->probability_of_chords_in_labels[$label][$chord] = $count / $numberOfSongs;
             }
         }
     }
 
-    public function getLabelProbabilities(): array
+    public function getProbabilityOfLabel(): array
     {
-        return $this->label_probabilities;
+        return $this->probability_of_label;
     }
 
     public function classify($chords): array
     {
-        $label_probabilities = $this->label_probabilities;
+        $label_probabilities = $this->getProbabilityOfLabel();
         $classified = [];
         foreach ($label_probabilities as $label => $probability) {
             $label_probability = $probability + $this->probability_step;

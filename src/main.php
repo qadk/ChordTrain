@@ -24,7 +24,7 @@ $calculator->train($paperBag, 'hard');
 $calculator->train($toxic, 'hard');
 $calculator->train($bulletproof, 'hard');
 
-print_r($calculator->getLabelProbabilities());
+print_r($calculator->getProbabilityOfLabel());
 print_r($calculator->classify(['d', 'g', 'e', 'dm']));
-print_r($calculator->getLabelProbabilities());
+print_r($calculator->getProbabilityOfLabel());
 print_r($calculator->classify(['f#m7', 'a', 'dadd9', 'dmaj7', 'bm', 'bm7', 'd', 'f#m']));
