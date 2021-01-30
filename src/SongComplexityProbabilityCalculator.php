@@ -11,7 +11,7 @@ class SongComplexityProbabilityCalculator
 
     public function train($chords, $label)
     {
-        $this->songs[] = [$label, $chords];
+        $this->songs[] = ['label' => $label, 'chords' => $chords];
         $this->label_counts[$label] += 1;
     }
 
@@ -31,9 +31,8 @@ class SongComplexityProbabilityCalculator
     public function setChordCountsInLabels()
     {
         foreach ($this->songs as $song) {
-            $label = $song[0];
-            foreach ($song[1] as $chord) {
-                $this->chord_counts_in_labels[$label][$chord] += 1;
+            foreach ($song['chords'] as $chord) {
+                $this->chord_counts_in_labels[$song['label']][$chord] += 1;
             }
         }
     }
