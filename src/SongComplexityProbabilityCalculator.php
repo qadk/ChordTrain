@@ -40,9 +40,9 @@ class SongComplexityProbabilityCalculator
     public function setProbabilityOfChordsInLabels()
     {
         $this->probability_of_chords_in_labels = $this->chord_counts_in_labels;
-        foreach (array_keys($this->probability_of_chords_in_labels) as $i) {
-            foreach (array_keys($this->probability_of_chords_in_labels[$i]) as $j) {
-                $this->probability_of_chords_in_labels[$i][$j] = $this->probability_of_chords_in_labels[$i][$j] * 1.0 / $this->getNumberOfSongs();
+        foreach (array_keys($this->probability_of_chords_in_labels) as $label) {
+            foreach (array_keys($this->probability_of_chords_in_labels[$label]) as $chord) {
+                $this->probability_of_chords_in_labels[$label][$chord] = $this->probability_of_chords_in_labels[$label][$chord] * 1.0 / $this->getNumberOfSongs();
             }
         }
     }
