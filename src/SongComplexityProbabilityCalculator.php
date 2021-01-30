@@ -24,23 +24,23 @@ class SongComplexityProbabilityCalculator
 
     public function classify($chords): array
     {
-        $label_probabilities = $this->getProbabilityOfLabel();
+        $probabilities_of_label = $this->getProbabilitiesOfLabel();
         $classified = [];
-        foreach ($label_probabilities as $label => $probability) {
-            $label_probability = $probability + $this->probability_step;
+        foreach ($probabilities_of_label as $label => $probability_of_label) {
+            $probability = $probability_of_label + $this->probability_step;
             foreach ($chords as $chord) {
-                $probabilityOfChordInLabel = $this->probability_of_chords_in_labels[$label][$chord];
-                if (isset($probabilityOfChordInLabel)) {
-                    $label_probability *= $probabilityOfChordInLabel + $this->probability_step;
+                $probability_of_chord_in_label = $this->probability_of_chords_in_labels[$label][$chord];
+                if (isset($probability_of_chord_in_label)) {
+                    $probability *= $probability_of_chord_in_label + $this->probability_step;
                 }
-                $classified[$label] = $label_probability;
+                $classified[$label] = $probability;
             }
         }
 
         return $classified;
     }
 
-    public function getProbabilityOfLabel(): array
+    public function getProbabilitiesOfLabel(): array
     {
         return $this->probability_of_label;
     }
@@ -52,12 +52,12 @@ class SongComplexityProbabilityCalculator
 
     private function setProbabilities()
     {
-        $numberOfSongs = $this->getNumberOfSongs();
+        $number_of_songs = $this->getNumberOfSongs();
 
         foreach ($this->chord_counts_in_labels as $label => $chords) {
-            $this->probability_of_label[$label] = $this->label_counts[$label] / $numberOfSongs;
+            $this->probability_of_label[$label] = $this->label_counts[$label] / $number_of_songs;
             foreach ($chords as $chord => $count) {
-                $this->probability_of_chords_in_labels[$label][$chord] = $count / $numberOfSongs;
+                $this->probability_of_chords_in_labels[$label][$chord] = $count / $number_of_songs;
             }
         }
     }
