@@ -28,5 +28,7 @@ $calculator->setLabelProbabilities();
 $calculator->setChordCountsInLabels();
 $calculator->setProbabilityOfChordsInLabels();
 
-$calculator->classify(['d', 'g', 'e', 'dm']);
-$calculator->classify(['f#m7', 'a', 'dadd9', 'dmaj7', 'bm', 'bm7', 'd', 'f#m']);
+print_r($calculator->getLabelProbabilities());
+print_r($calculator->classify(['d', 'g', 'e', 'dm']));
+print_r($calculator->getLabelProbabilities());
+print_r($calculator->classify(['f#m7', 'a', 'dadd9', 'dmaj7', 'bm', 'bm7', 'd', 'f#m']));

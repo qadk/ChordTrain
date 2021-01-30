@@ -47,10 +47,14 @@ class SongComplexityProbabilityCalculator
         }
     }
 
-    public function classify($chords)
+    public function getLabelProbabilities(): array
+    {
+        return $this->label_probabilities;
+    }
+
+    public function classify($chords): array
     {
         $label_probabilities = $this->label_probabilities;
-        print_r($label_probabilities);
         $classified = [];
         foreach ($label_probabilities as $label => $probability) {
             $label_probability = $probability + $this->probability_step;
@@ -62,6 +66,7 @@ class SongComplexityProbabilityCalculator
                 $classified[$label] = $label_probability;
             }
         }
-        print_r($classified);
+
+        return $classified;
     }
 }
