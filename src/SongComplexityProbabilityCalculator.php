@@ -13,7 +13,7 @@ class SongComplexityProbabilityCalculator
     public function train($chords, $label)
     {
         $this->songs[] = [$label, $chords];
-        if (!!(in_array($label, array_keys($this->label_counts)))) {
+        if (in_array($label, array_keys($this->label_counts))) {
             $this->label_counts[$label] = $this->label_counts[$label] + 1;
         } else {
             $this->label_counts[$label] = 1;
