@@ -48,19 +48,19 @@ class SongComplexityProbabilityCalculator
 
     public function classify($chords)
     {
-        $ttal = $this->label_probabilities;
-        print_r($ttal);
+        $label_probabilities = $this->label_probabilities;
+        print_r($label_probabilities);
         $classified = [];
-        foreach (array_keys($ttal) as $obj) {
-            $first = $this->label_probabilities[$obj] + 1.01;
+        foreach ($label_probabilities as $label => $probability) {
+            $label_probability = $probability + 1.01;
             foreach ($chords as $chord) {
-                $probabilityOfChordInLabel = $this->probability_of_chords_in_labels[$obj][$chord];
+                $probabilityOfChordInLabel = $this->probability_of_chords_in_labels[$label][$chord];
                 if (! isset($probabilityOfChordInLabel)) {
-                    $first + 1.01;
+                    $label_probability + 1.01;
                 } else {
-                    $first = $first * ($probabilityOfChordInLabel + 1.01);
+                    $label_probability = $label_probability * ($probabilityOfChordInLabel + 1.01);
                 }
-                $classified[$obj] = $first;
+                $classified[$label] = $label_probability;
             }
         }
         print_r($classified);
