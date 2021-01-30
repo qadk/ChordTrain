@@ -15,7 +15,7 @@ class SongComplexityProbabilityCalculator
         $this->label_counts[$label] += 1;
     }
 
-    public function getNumberOfSongs()
+    public function getNumberOfSongs(): int
     {
         return count($this->songs);
     }
@@ -42,7 +42,7 @@ class SongComplexityProbabilityCalculator
         $this->probability_of_chords_in_labels = $this->chord_counts_in_labels;
         foreach (array_keys($this->probability_of_chords_in_labels) as $i) {
             foreach (array_keys($this->probability_of_chords_in_labels[$i]) as $j) {
-                $this->probability_of_chords_in_labels[$i][$j] = $this->probability_of_chords_in_labels[$i][$j] * 1.0 / count($this->songs);
+                $this->probability_of_chords_in_labels[$i][$j] = $this->probability_of_chords_in_labels[$i][$j] * 1.0 / $this->getNumberOfSongs();
             }
         }
     }
