@@ -24,9 +24,6 @@ $calculator->train($paperBag, 'hard');
 $calculator->train($toxic, 'hard');
 $calculator->train($bulletproof, 'hard');
 
-$calculator->setLabelProbabilities();
-$calculator->setProbabilityOfChordsInLabels();
-
 print_r($calculator->getLabelProbabilities());
 print_r($calculator->classify(['d', 'g', 'e', 'dm']));
 print_r($calculator->getLabelProbabilities());
