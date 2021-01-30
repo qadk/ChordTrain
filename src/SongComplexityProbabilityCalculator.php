@@ -7,7 +7,6 @@ class SongComplexityProbabilityCalculator
     public function train($chords, $label)
     {
         $GLOBALS['songs'][] = [$label, $chords];
-        $GLOBALS['label'][] = $label;
         for ($i = 0; $i < count($chords); $i++) {
             if (!in_array($chords[$i], $GLOBALS['allChords'])) {
                 $GLOBALS['allChords'][] = $chords[$i];
