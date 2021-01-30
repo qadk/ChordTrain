@@ -8,6 +8,7 @@ class SongComplexityProbabilityCalculator
     private $label_probabilities = [];
     private $chord_counts_in_labels = [];
     private $probability_of_chords_in_labels = [];
+    private $probability_step = 1.01;
 
     public function train($chords, $label)
     {
@@ -52,11 +53,11 @@ class SongComplexityProbabilityCalculator
         print_r($label_probabilities);
         $classified = [];
         foreach ($label_probabilities as $label => $probability) {
-            $label_probability = $probability + 1.01;
+            $label_probability = $probability + $this->probability_step;
             foreach ($chords as $chord) {
                 $probabilityOfChordInLabel = $this->probability_of_chords_in_labels[$label][$chord];
                 if (isset($probabilityOfChordInLabel)) {
-                    $label_probability = $label_probability * ($probabilityOfChordInLabel + 1.01);
+                    $label_probability *= $probabilityOfChordInLabel + $this->probability_step;
                 }
                 $classified[$label] = $label_probability;
             }
