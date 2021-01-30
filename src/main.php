@@ -25,7 +25,6 @@ $calculator->train($toxic, 'hard');
 $calculator->train($bulletproof, 'hard');
 
 $calculator->setLabelProbabilities();
-$calculator->setChordCountsInLabels();
 $calculator->setProbabilityOfChordsInLabels();
 
 print_r($calculator->getLabelProbabilities());
