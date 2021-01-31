@@ -5,8 +5,8 @@ class SongComplexityProbabilityCalculator
 {
     private $songs = [];
     private $label_counts = [];
-    private $probability_of_label = [];
     private $chord_counts_in_labels = [];
+    private $probability_of_label = [];
     private $probability_of_chords_in_labels = [];
     private $probability_step = 1.01;
 
@@ -28,9 +28,10 @@ class SongComplexityProbabilityCalculator
         $classified = [];
         foreach ($probabilities_of_label as $label => $probability_of_label) {
             $probability = $probability_of_label + $this->probability_step;
-            
+
             $classified[$label] = array_reduce($chords,
-                $this->calculateChordInLabelProbability($this->probability_of_chords_in_labels[$label], $this->probability_step),
+                $this->calculateChordInLabelProbability($this->probability_of_chords_in_labels[$label],
+                    $this->probability_step),
                 $probability);
         }
 
