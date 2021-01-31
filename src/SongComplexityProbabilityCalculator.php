@@ -28,13 +28,10 @@ class SongComplexityProbabilityCalculator
         $classified = [];
         foreach ($probabilities_of_label as $label => $probability_of_label) {
             $probability = $probability_of_label + $this->probability_step;
-            foreach ($chords as $chord) {
-                $probability_of_chord_in_label = $this->probability_of_chords_in_labels[$label][$chord];
-                if (isset($probability_of_chord_in_label)) {
-                    $probability *= $probability_of_chord_in_label + $this->probability_step;
-                }
-                $classified[$label] = $probability;
-            }
+            
+            $classified[$label] = array_reduce($chords,
+                $this->calculateChordInLabelProbability($this->probability_of_chords_in_labels[$label], $this->probability_step),
+                $probability);
         }
 
         return $classified;
@@ -60,5 +57,20 @@ class SongComplexityProbabilityCalculator
                 $this->probability_of_chords_in_labels[$label][$chord] = $count / $number_of_songs;
             }
         }
+    }
+
+    /**
+     * @param array $chords_count
+     * @param float $step
+     * @return Closure
+     */
+    private function calculateChordInLabelProbability(array $chords_count, float $step): Closure
+    {
+        return function ($probability, $chord) use ($chords_count, $step) {
+            if (isset($chords_count[$chord])) {
+                $probability *= $chords_count[$chord] + $step;
+            }
+            return $probability;
+        };
     }
 }
